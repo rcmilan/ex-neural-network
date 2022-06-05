@@ -1,7 +1,7 @@
 ﻿namespace Functions
 
 module NeuronMath =
-    let dotWithBias (dotProducts: float seq) (bias : float seq) : float seq = 
+    let applyBias (dotProducts: float seq) (bias : float seq) : float seq = 
         Seq.map2 (+) dotProducts bias 
         
     let private dotWeightsByInputs (weight : float seq) (input : float seq) : float = Seq.fold2 (fun state i w -> state + i * w) LanguagePrimitives.GenericZero input weight
