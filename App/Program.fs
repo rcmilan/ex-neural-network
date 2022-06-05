@@ -17,7 +17,6 @@ let weightsSeq : seq<float> seq = [|
 
 let bias : seq<float> = [| 2.0; 3.0; 0.5 |]
 
-
 let weightsSeq2 : seq<float> seq = [|
         [|0.1; -0.14; 0.5;|];
         [|-0.5; 0.12; -0.33;|];
@@ -31,10 +30,9 @@ let result = dot<float seq seq> weightsSeq inputs
                 |> dot<float seq seq> weightsSeq2
                 |> Seq.map(fun f -> dotWithBias f bias2) // Resultado da camada 2
 
-for a in result do 
-    for b in a do
-        printf "%A\t" b
+for dotProductWithBias in result do 
+    for res in dotProductWithBias do
+        printf "%A\t" res
     printf "\n"
-    
 
 System.Console.ReadKey() |> ignore
