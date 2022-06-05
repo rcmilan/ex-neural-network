@@ -6,6 +6,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Include="Types\NeuronTypes.fs" />
+    <Compile Include="Functions\NeuronMath.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 

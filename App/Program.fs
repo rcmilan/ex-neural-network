@@ -1,16 +1,5 @@
-﻿type Inputs = float seq
-type Weights = float seq
-type Bias = float
-type DotProduct = float
-
-let dotWithBias (dotProducts: DotProduct seq) (bias : Bias seq) = 
-    Seq.map2 (+) dotProducts bias 
-
-let dot (weightSequence : Weights seq) (inputs : Inputs) =
-
-    let dot (weight : Weights) (input : Inputs) = Seq.fold2 (fun state i w -> state + i * w) LanguagePrimitives.GenericZero input weight
-    
-    weightSequence |> Seq.map(fun weights -> dot weights inputs)
+﻿open Types.NeuronTypes
+open Functions.NeuronMath
 
 printfn "=============================="
 printfn "NEURAL NETWORK FROM SCRATCH!!!"
@@ -23,9 +12,9 @@ let weightsSeq : Weights seq = [|
         [|-0.26; -0.27; 0.17; 0.87|]
     |]
 
-let bias : Bias seq = [| 2.0;3.0;0.5 |]
+let bias : Bias seq = [| 2.0; 3.0; 0.5 |]
 
-let dps : DotProduct seq = (dot weightsSeq inputs) 
+let dps = (dot weightsSeq inputs) 
 
 printfn "RESULTADO DA CAMADA!!!"
 Seq.iter (printfn "\t%A") (dotWithBias dps bias)
