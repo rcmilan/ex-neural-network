@@ -1,9 +1,22 @@
 ﻿open Functions.NeuronMath
 
+type Layer_Dense (nInputs: int, nNeurons : int) as self =
+    let mutable _output:float seq seq = [||]
+
+    member _.weights=[0.0]
+    member _.biases=[0.0]
+    member _.output = _output
+
+    member _.foward (input: float seq) =
+        let dp = dot<float seq seq> self.weights input
+                |> Seq.map(fun f -> applyBias f self.biases)
+
+        _output <- dp
+        
 printfn "=============================="
 printfn "NEURAL NETWORK FROM SCRATCH!!!"
 
-let inputs : seq<float> seq = [|
+let X : seq<float> seq = [| // Input
         [| 1.0; 2.0; 3.0; 2.5 |];
         [|2.0; 5.0; -1.0; 2.0|];
         [|-1.5; 2.7; 3.3; -0.8|]
@@ -25,10 +38,10 @@ let weightsSeq2 : seq<float> seq = [|
 
 let bias2 : seq<float> = [| -1.0; 2.0; -0.5 |]
 
-let result = dot<float seq seq> weightsSeq inputs
-                |> Seq.map(fun f -> dotWithBias f bias) // Resultado da camada 1
+let result = dot<float seq seq> weightsSeq X
+                |> Seq.map(fun f -> applyBias f bias) // Resultado da camada 1
                 |> dot<float seq seq> weightsSeq2
-                |> Seq.map(fun f -> dotWithBias f bias2) // Resultado da camada 2
+                |> Seq.map(fun f -> applyBias f bias2) // Resultado da camada 2
 
 for dotProductWithBias in result do 
     for res in dotProductWithBias do
