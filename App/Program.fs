@@ -4,7 +4,11 @@ open Functions.NeuronMath
 printfn "=============================="
 printfn "NEURAL NETWORK FROM SCRATCH!!!"
 
-let inputs : Inputs = [| 1.0; 2.0; 3.0; 2.5 |]
+let inputs : Inputs seq = [|
+        [| 1.0; 2.0; 3.0; 2.5 |];
+        [|2.0; 5.0; -1.0; 2.0|];
+        [|-1.5; 2.7; 3.3; -0.8|]
+    |]
 
 let weightsSeq : Weights seq = [|
         [|0.2; 0.8; -0.5; 1.0|];
@@ -14,9 +18,11 @@ let weightsSeq : Weights seq = [|
 
 let bias : Bias seq = [| 2.0; 3.0; 0.5 |]
 
-let dps = (dot weightsSeq inputs) 
+let dotProducts = dot<DotProduct seq seq> weightsSeq inputs
 
 printfn "RESULTADO DA CAMADA!!!"
-Seq.iter (printfn "\t%A") (dotWithBias dps bias)
+for dotProduct in dotProducts do
+    Seq.iter (printf "\t%A") (dotWithBias dotProduct bias)
+    printf "\n"
 
 System.Console.ReadKey() |> ignore
