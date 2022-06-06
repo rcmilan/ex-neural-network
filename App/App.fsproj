@@ -6,7 +6,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Functions\NeuronMath.fs" />
+    <Compile Include="Data\Spiral.fs" />
+    <Compile Include="Functions\ReLU.fs" />
+    <Compile Include="Layers\Dense.fs" />
     <Compile Include="Program.fs" />
   </ItemGroup>
 
