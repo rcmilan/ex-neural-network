@@ -6,8 +6,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="Functions\NeuronMath.fs" />
+    <Compile Include="Data\Spiral.fs" />
+    <Compile Include="Functions\ReLU.fs" />
+    <Compile Include="Layers\Dense.fs" />
     <Compile Include="Program.fs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MathNet.Numerics" Version="5.0.0" />
+    <PackageReference Include="MathNet.Numerics.FSharp" Version="5.0.0" />
   </ItemGroup>
 
 </Project>
